@@ -91,12 +91,12 @@ export default {
       this.player.life = this.player.life - 10
       this.monster.life = this.monster.life - 8
 
-      this.log.push({
+      this.log.unshift({
         infoFrom: "player",
         info: "Player attacked - " + 8 + " pontos "
         })
 
-      this.log.push({
+      this.log.unshift({
         infoFrom: "monster",
         info: "Monster attacked - " + 10 + " pontos "
         })
@@ -108,12 +108,12 @@ export default {
       this.player.life = this.player.life - 8
       this.monster.life = this.monster.life - 10
 
-            this.log.push({
+            this.log.unshift({
         infoFrom: "player",
         info: "Player attacked - " + 10 + " pontos "
         })
 
-      this.log.push({
+      this.log.unshift({
         infoFrom: "monster",
         info: "Monster attacked - " + 8 + " pontos "
         })
@@ -128,7 +128,7 @@ export default {
         this.player.life = 100
       }
 
-        this.log.push({
+        this.log.unshift({
         infoFrom: "player",
         info: "Player cured - " + 10 + " pontos "
         })
