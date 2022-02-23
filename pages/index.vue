@@ -41,15 +41,15 @@
       </template>
 
       <template v-if="isWinner != null">
-        <button @click="startGame">Play Again</button>
+        <button 
+        class="final-button"
+        @click="startGame">Play Again</button>
           <p 
           v-if="isWinner"
-          class="fine"
-          >You Won </p>
+          class="fine final-message" > You Won </p>
           <p
           v-else
-          class="danger"
-          > You Lost </p>
+          class="danger final-message" > You Lost </p>
       </template>
 
     </div>
@@ -60,7 +60,7 @@
       <ul>
         <ol 
         v-for="linha in log" 
-        class="linha-lista"
+        class="line-list"
         :class="{fine: (linha.infoFrom == 'player') , danger: (linha.infoFrom == 'monster')}"
         :key="linha" >{{linha.info}}</ol>
       </ul>
@@ -85,6 +85,9 @@ export default {
   methods:{
     startGame(){
       this.isPlaying = !this.isPlaying
+      this.player.life = 100
+      this.monster.life = 100
+      this.log = []
       this.isWinner = null
     },
     attack(){
@@ -93,12 +96,12 @@ export default {
 
       this.log.unshift({
         infoFrom: "player",
-        info: "Player attacked - " + 8 + " pontos "
+        info: "Player attacked - " + 8 + " points "
         })
 
       this.log.unshift({
         infoFrom: "monster",
-        info: "Monster attacked - " + 10 + " pontos "
+        info: "Monster attacked - " + 10 + " points "
         })
 
       this.result
@@ -110,12 +113,12 @@ export default {
 
             this.log.unshift({
         infoFrom: "player",
-        info: "Player attacked - " + 10 + " pontos "
+        info: "Player attacked - " + 10 + " points "
         })
 
       this.log.unshift({
         infoFrom: "monster",
-        info: "Monster attacked - " + 8 + " pontos "
+        info: "Monster attacked - " + 8 + " points "
         })
 
       this.result
@@ -130,7 +133,7 @@ export default {
 
         this.log.unshift({
         infoFrom: "player",
-        info: "Player cured - " + 10 + " pontos "
+        info: "Player cured - " + 10 + " points "
         })
 
       this.BarColor
@@ -188,11 +191,11 @@ body{ background-color: whitesmoke; }
 }
 
 .fine{
-  background-color: rgb(9, 202, 9);
+  background-color: rgb(7, 231, 7);
 }
 
 .danger{
-  background-color: rgb(194, 1, 1);
+  background-color: rgb(255, 56, 56);
 }
 
 
@@ -206,9 +209,22 @@ body{ background-color: whitesmoke; }
   padding: 50px;
 }
 
-.linha-lista{
+.line-list{
   margin: 10px;
   border-radius: 10px;
+  text-align: center;
+  padding: 5px;
+}
+
+.final-message{
+  padding: 15px;
+  border-radius: 10px;
+}
+
+.final-button{
+  margin: auto 0;
+  height: 70px;
+  padding: 25px;
 }
 
 
