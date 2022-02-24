@@ -1,8 +1,16 @@
 [
   {
+    "name": "todolist",
+    "path": "/todolist",
+    "component": "C:\\\\Projetos\\\\teste\\\\pages\\\\todolist.vue",
+    "chunkName": "pages/todolist",
+    "_name": "_2a9c5a2c"
+  },
+  {
     "name": "index",
     "path": "/",
     "component": "C:\\\\Projetos\\\\teste\\\\pages\\\\index.vue",
-    "chunkName": "pages/index"
+    "chunkName": "pages/index",
+    "_name": "_5662fcbc"
   }
 ]

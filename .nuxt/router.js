@@ -4,6 +4,7 @@ import { normalizeURL, decode } from 'ufo'
 import { interopDefault } from './utils'
 import scrollBehavior from './router.scrollBehavior.js'
 
+const _2a9c5a2c = () => interopDefault(import('..\\pages\\todolist.vue' /* webpackChunkName: "pages/todolist" */))
 const _5662fcbc = () => interopDefault(import('..\\pages\\index.vue' /* webpackChunkName: "pages/index" */))
 
 const emptyFn = () => {}
@@ -18,6 +19,10 @@ export const routerOptions = {
   scrollBehavior,
 
   routes: [{
+    path: "/todolist",
+    component: _2a9c5a2c,
+    name: "todolist"
+  }, {
     path: "/",
     component: _5662fcbc,
     name: "index"

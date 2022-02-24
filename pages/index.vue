@@ -59,10 +59,11 @@
     class="painel three">
       <ul>
         <ol 
-        v-for="linha in log" 
+        v-for="(linha, index) in log" 
+        :key="index"
         class="line-list"
         :class="{fine: (linha.infoFrom == 'player') , danger: (linha.infoFrom == 'monster')}"
-        :key="linha" >{{linha.info}}</ol>
+         >{{linha.info}}</ol>
       </ul>
     </div>
 
@@ -85,6 +86,9 @@ export default {
   methods:{
     startGame(){
       this.isPlaying = !this.isPlaying
+      this.resetGame()
+    },
+    resetGame(){
       this.player.life = 100
       this.monster.life = 100
       this.log = []
@@ -104,11 +108,11 @@ export default {
         })
 
       this.result
-      this.BarColor
+
     },
     specialAttack(){
-      this.player.life = Math.max(0, this.player.life - 10)
-      this.monster.life = Math.max(0, this.monster.life - 8)
+      this.player.life = Math.max(0, this.player.life - 8)
+      this.monster.life = Math.max(0, this.monster.life - 10)
 
       this.log.unshift({
         infoFrom: "player",
@@ -121,24 +125,24 @@ export default {
         })
 
       this.result
-      this.BarColor
+  
     },
     cure(){
-        this.player.life = Math.min(100, this.player.life + 10) 
+        if (this.player.life < 100){
+          this.player.life = Math.min(100, this.player.life + 10) 
 
-        this.log.unshift({
-        infoFrom: "player",
-        info: "Player cured - " + 10 + " points "
-        })
+          this.log.unshift({
+          infoFrom: "player",
+          info: "Player cured - " + 10 + " points "
+          })
+        }
+        
+    }
 
-      this.BarColor
-    },
+    ,
     quitGame(){
       this.isPlaying = !this.isPlaying
-      this.player.life = 100
-      this.monster.life = 100
-
-      this.log = []
+      this.resetGame()
     }
   },
   computed:{
@@ -146,31 +150,40 @@ export default {
       return this.player.life  <= 0 ?
              this.isWinner = false :
              this.monster.life <= 0 ?
-             this.isWinner = true  : 
-             null
+             this.isWinner = true  : null
+    }
+  },
+  watch:{
+    result(n,o){
+      console.log('novo: ', n);
+      console.log('antigo: ', o);
     }
   }
 
 }
 </script>
 
-<style>
+<style >
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa&display=swap');
 
-body{ background-color: whitesmoke; }
+body{ 
+  background-color: whitesmoke;
+  font-family: 'Comfortaa', cursive;
+}
 
 
-.painel.one{
+.one{
   display: flex;
   justify-content: space-around;
   text-align: center;
 }
 
-.painel.two{
+.two{
   display: flex;
   justify-content: space-around;
   text-align: center;
 }
-.painel.two button{
+.two button{
   font-size: 20px;
   padding: 10px 30px;
 }
@@ -193,10 +206,8 @@ body{ background-color: whitesmoke; }
   background-color: rgb(255, 56, 56);
 }
 
-
 .painel{
   font-size: 30px;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   margin: 50px auto;
   background-color: white;
   box-shadow: 0 0 0.8em rgb(182, 182, 182);
@@ -221,6 +232,28 @@ body{ background-color: whitesmoke; }
   height: 70px;
   padding: 25px;
 }
+
+@media (max-width: 600px){
+.one, .two{
+  flex-direction: column;
+}
+
+.one{
+  margin: 30px auto;
+}
+.life-bar{
+  width: 100%;
+}
+.painel{
+  font-size: 20px;
+  padding: 30px;
+}
+.three ul{
+  margin: 30px auto;
+  padding:0;
+}
+}
+
 
 
 </style>
