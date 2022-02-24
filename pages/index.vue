@@ -91,9 +91,8 @@ export default {
       this.isWinner = null
     },
     attack(){
-      this.player.life = this.player.life - 10
-      this.monster.life = this.monster.life - 8
-
+      this.player.life = Math.max(0, this.player.life - 10)
+      this.monster.life = Math.max(0, this.monster.life - 8)
       this.log.unshift({
         infoFrom: "player",
         info: "Player attacked - " + 8 + " points "
@@ -108,10 +107,10 @@ export default {
       this.BarColor
     },
     specialAttack(){
-      this.player.life = this.player.life - 8
-      this.monster.life = this.monster.life - 10
+      this.player.life = Math.max(0, this.player.life - 10)
+      this.monster.life = Math.max(0, this.monster.life - 8)
 
-            this.log.unshift({
+      this.log.unshift({
         infoFrom: "player",
         info: "Player attacked - " + 10 + " points "
         })
@@ -125,11 +124,7 @@ export default {
       this.BarColor
     },
     cure(){
-      if (this.player.life <= 90){
-        this.player.life = this.player.life + 10
-      }else{
-        this.player.life = 100
-      }
+        this.player.life = Math.min(100, this.player.life + 10) 
 
         this.log.unshift({
         infoFrom: "player",
